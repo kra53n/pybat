@@ -1,19 +1,38 @@
-import pyxel as px
+import pygame as pg
 
 from config import Window
 
 
-class App:
+class Game:
     def __init__(self):
-        px.init(Window.w, Window.h, title=Window.title)
-        px.run(self._update, self._draw)
+        pg.init()
+        self._screen = pg.display.set_mode(Window.size, pg.SCALED)
+        pg.display.set_caption(Window.title)
+
+        self._run = True
+
+        self._loop()
+
+    def _update_keydown(self, key):
+        pass
+
+    def _update_keyup(self, key):
+        pass
 
     def _update(self):
-        pass
+        for event in pg.event.get():
+            match event.type:
+                case pg.QUIT:
+                    self._run = False
+                case pg.KEYDOWN:
+                    self._update_keydown(event.key)
+                case pg.KEYUP:
+                    self._update_keyup(event.key)
 
-    def _draw(self):
-        pass
+    def _loop(self):
+        while self._run:
+            self._update()
 
 
 if __name__ == '__main__':
-    App()
+    Game()

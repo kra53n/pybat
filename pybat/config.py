@@ -3,6 +3,5 @@ from dataclasses import dataclass
 
 @dataclass
 class Window:
-    w = 256
-    h = 256
+    size = (1280, 720)
     title = 'PyBat'
