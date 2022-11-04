@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 
-from funcs import hex2rgb
+import pygame as pg
+
+from tools import hex2rgb
 
 
 @dataclass
@@ -13,3 +15,13 @@ class Window:
 @dataclass
 class Images:
     player = 'assets/bat.png'
+
+
+pg.font.init()
+
+
+font = pg.font.Font("assets/fonts/MainFont.ttf", 50)
+button_settings = {'rect': pg.Rect(120, 120, 240, 60),
+                   'action': lambda: print('hey'), 'border_radius': 12,
+                   'active_col': pg.Color('0xbb9af7'),
+                   'non_active_col': pg.Color('0x1a1b26')}

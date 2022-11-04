@@ -1,5 +1,5 @@
 from config import Images
-from funcs import load_image
+from tools import load_image
 
 
 class Player:
