@@ -15,7 +15,7 @@ class Button:
                  active_col: int,
                  non_active_col:int):
         self._text = text
-        self._rect = rect
+        self._rect = rect.copy()
 
         self._action = action
 
@@ -24,6 +24,9 @@ class Button:
         self._non_active_col = non_active_col
 
         self._cols = self._active_col, self._non_active_col
+
+    def __str__(self):
+        return f'<Button> - text: {self._text}, x: {self._rect.x}, y: {self._rect.y}'
 
     def _cover(self):
         return self._rect.collidepoint(pg.mouse.get_pos())

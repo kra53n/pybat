@@ -3,6 +3,7 @@ import pygame as pg
 from config import Window, button_settings
 from player import Player
 from ui_comps import Button
+from menu import menu
 
 
 class Game:
@@ -15,7 +16,7 @@ class Game:
         self._clock = pg.time.Clock()
         self._player = Player()
 
-        self._objs = Button(text='hello', **button_settings),
+        self._objs = Button(text='hello', action = lambda: print('hey'), **button_settings),
 
         self._draw()
         self._loop()
@@ -51,6 +52,7 @@ class Game:
         pg.display.flip()
 
     def _loop(self):
+        menu(self._screen)
         while self._run:
             self._clock.tick(60)
             self._update()
