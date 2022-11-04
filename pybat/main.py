@@ -45,10 +45,10 @@ class Game:
                 case pg.KEYUP:
                     self._update_keyup(event.key)
 
-            for obj in self._objs:
-                obj.update()
+        for obj in self._objs:
+            obj.update()
 
-            pg.display.flip()
+        pg.display.flip()
 
     def _loop(self):
         while self._run:
