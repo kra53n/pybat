@@ -53,10 +53,10 @@ class Game:
 
     def _loop(self):
         menu(self._screen)
-        while self._run:
-            self._clock.tick(60)
-            self._update()
-            #pg.display()
+        # while self._run:
+        #     self._clock.tick(60)
+        #     self._update()
+        #     #pg.display()
 
 
 if __name__ == '__main__':

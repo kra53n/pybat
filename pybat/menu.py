@@ -1,28 +1,24 @@
 import pygame as pg
 
-from config import Window
+from ui.frame import Frame
 from ui.button import Button
-from config import font, button_settings
+from config import Window, font, button_settings
 
 
 def menu(screen):
-    options = 'play', 'settings', 'exit'
-    actions = (lambda: print('play'), lambda: print('settings'), lambda: print('exit'))
-
     run = True
     clock = pg.time.Clock()
-    objs = []
 
-    x = Window.size[0] // 2
-    y = 0
-    pad = 120
-    for i, (opt, act) in enumerate(zip(options, actions)):
-        btn = Button(font, text=opt, action=act, **button_settings)
-        btn._rect.center = x, y
-        y += pad
-        objs.append(btn)
+    frame = Frame(rect=pg.Rect(0, 0, 300, 0), padding=40)
+    frame.w = 300
+    options = 'play', 'settings', 'exit'
+    actions = (lambda: print('play'), lambda: print('settings'), lambda: print('exit'))
+    for opt, act in zip(options, actions):
+        frame.append(Button(font, text=opt, action=act, **button_settings))
+    frame.centerize(pg.Rect(0, 0, *Window.size))
 
     pressed = True
+
     while run:
         for event in pg.event.get():
             pressed = True
@@ -31,14 +27,17 @@ def menu(screen):
                     run = False
 
         if pressed:
-            for obj in objs:
-                print(obj)
-                obj.update()
+            frame.update()
+            # frame.centerize(pg.Rect(0, 0, *Window.size))
+            # for obj in objs:
+            #     print(obj)
+            #     obj.update()
 
         if pressed:
             screen.fill(Window.bg)
-            for obj in objs:
-                obj.draw(screen)
+            frame.draw(screen)
+            # for obj in objs:
+            #     obj.draw(screen)
 
         pg.display.flip()
         clock.tick(60)
