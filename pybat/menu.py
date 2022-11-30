@@ -1,8 +1,8 @@
 import pygame as pg
 
 from config import Window
-from ui_comps import Button
-from config import button_settings
+from ui.button import Button
+from config import font, button_settings
 
 
 def menu(screen):
@@ -17,7 +17,7 @@ def menu(screen):
     y = 0
     pad = 120
     for i, (opt, act) in enumerate(zip(options, actions)):
-        btn = Button(text=opt, action=act, **button_settings)
+        btn = Button(font, text=opt, action=act, **button_settings)
         btn._rect.center = x, y
         y += pad
         objs.append(btn)

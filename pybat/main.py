@@ -1,8 +1,8 @@
 import pygame as pg
 
-from config import Window, button_settings
+from config import Window, font, button_settings
 from player import Player
-from ui_comps import Button
+from ui.button import Button
 from menu import menu
 
 
@@ -16,7 +16,7 @@ class Game:
         self._clock = pg.time.Clock()
         self._player = Player()
 
-        self._objs = Button(text='hello', action = lambda: print('hey'), **button_settings),
+        self._objs = Button(font, text='hello', action = lambda: print('hey'), **button_settings),
 
         self._draw()
         self._loop()

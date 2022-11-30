@@ -1,10 +1,10 @@
 import pygame as pg
 
-from config import font
-
 
 class Button:
     def __init__(self,
+                 font: pg.font.Font,
+                 
                  text: str,
                  rect: pg.Rect,
 
@@ -14,6 +14,8 @@ class Button:
                  border_radius: int,
                  active_col: int,
                  non_active_col:int):
+        self.font = font
+        
         self._text = text
         self._rect = rect.copy()
 
@@ -37,7 +39,7 @@ class Button:
 
     def draw(self, screen: pg.Surface):
         covering = self._cover()
-        ren = font.render(self._text, True, self._cols[covering])
+        ren = self.font.render(self._text, True, self._cols[covering])
 
         pg.draw.rect(screen, self._cols[not covering], self._rect,
                      border_radius=self._border_radius)
