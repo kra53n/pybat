@@ -20,7 +20,6 @@ class Menu:
 
     def _init_buttons(self):
         self._frame = Frame(rect=pg.Rect(0, 0, 300, 0), padding=40)
-        self._frame.w = 300
         options = 'play', 'settings', 'exit'
         actions = lambda: self._cmds.quit(), lambda: print('settings'), lambda: print('exit')
         for opt, act in zip(options, actions):
@@ -42,14 +41,14 @@ class Menu:
             self._frame.update()
 
     def draw(self):
-        self._screen.fill(Window.bg)
-        self._frame.draw(self._screen)
-        pg.display.flip()
+        if self._pressed:
+            self._screen.fill(Window.bg)
+            self._frame.draw(self._screen)
+            pg.display.flip()
 
     def run(self):
         while self._run:
-            if self._pressed:
-                self.update()
-                self.draw()
+            self.update()
+            self.draw()
             self._clock.tick(60)
-            pressed = False
+            self._pressed = False
