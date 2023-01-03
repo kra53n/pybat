@@ -1,27 +1,31 @@
 import pygame as pg
 
-from ui.frame import Frame
-from ui.button import Button
-from config import Window, font, button_settings
+from play import Play
+from ui import Frame, Button
 from commands import Commands
+from config import Window, font, button_settings
 
 
 class Menu:
-    def __init__(self, screen: pg.Surface):
+    def __init__(self, screen: pg.Surface, btns = None):
         self._screen = screen
 
         self._run = True
         self._clock = pg.time.Clock()
         self._cmds = Commands()
-        self._frame = None
+        self._frame = Frame(rect=pg.Rect(0, 0, 300, 0), padding=40)
         self._pressed = True
 
-        self._init_buttons()
+        if btns is None:
+            self._init_default_buttons()
+        else:
+            self._init_buttons()
+        
+        self.run()
 
-    def _init_buttons(self):
-        self._frame = Frame(rect=pg.Rect(0, 0, 300, 0), padding=40)
+    def _init_default_buttons(self):
         options = 'play', 'settings', 'exit'
-        actions = lambda: self._cmds.quit(), lambda: print('settings'), lambda: print('exit')
+        actions = lambda: self._cmds.start_playing(), lambda: print('settings'), lambda: self._cmds.quit()
         for opt, act in zip(options, actions):
             self._frame.append(Button(font, text=opt, action=act, **button_settings))
         self._frame.centerize(pg.Rect(0, 0, *Window.size))
@@ -36,6 +40,9 @@ class Menu:
             if 'quit' in self._cmds:
                 self._cmds.remove('quit')
                 self._run = False
+            if 'start_playing' in self._cmds:
+                self._cmds.remove('start_playing')
+                Play(self._screen)
 
         if self._pressed:
             self._frame.update()

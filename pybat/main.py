@@ -2,7 +2,8 @@ import pygame as pg
 
 from config import Window, font, button_settings
 from player import Player
-from ui.button import Button
+# from ui.button import Button
+from ui import Button
 from menu import Menu
 
 
@@ -52,11 +53,7 @@ class Game:
         pg.display.flip()
 
     def _loop(self):
-        Menu(self._screen).run()
-        # while self._run:
-        #     self._clock.tick(60)
-        #     self._update()
-        #     #pg.display()
+        Menu(self._screen)
 
 
 if __name__ == '__main__':
