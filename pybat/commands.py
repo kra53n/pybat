@@ -10,5 +10,8 @@ class Commands(set):
     def start_playing(self):
         self.add('start_playing')
     
-    def quit_play_menu(self):
-        self.add('quit_play_menu')
+    def quit_from_play(self):
+        self.add('quit_from_play')
+
+
+cmds = Commands()

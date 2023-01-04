@@ -2,9 +2,8 @@ import pygame as pg
 
 from play import Play
 from ui import Frame, Button
-from commands import Commands
+from commands import cmds
 from config import Window, font, button_settings
-
 
 class Menu:
     def __init__(self, screen: pg.Surface, btns = None):
@@ -12,21 +11,22 @@ class Menu:
 
         self._run = True
         self._clock = pg.time.Clock()
-        self._cmds = Commands()
         self._frame = Frame(rect=pg.Rect(0, 0, 300, 0), padding=40)
         self._pressed = True
+        self.btns = btns
 
-        if btns is None:
-            self._init_default_buttons()
-        else:
-            self._init_buttons()
+        if self.btns is None:
+            self.btns = (
+                ('play', lambda: cmds.start_playing()),
+                ('settings', lambda: print('settings')),
+                ('exit', lambda: cmds.quit()),
+            )
+        self._init_buttons()
         
         self.run()
 
-    def _init_default_buttons(self):
-        options = 'play', 'settings', 'exit'
-        actions = lambda: self._cmds.start_playing(), lambda: print('settings'), lambda: self._cmds.quit()
-        for opt, act in zip(options, actions):
+    def _init_buttons(self):
+        for opt, act in self.btns:
             self._frame.append(Button(font, text=opt, action=act, **button_settings))
         self._frame.centerize(pg.Rect(0, 0, *Window.size))
 
@@ -37,11 +37,11 @@ class Menu:
                 case pg.QUIT:
                     self._run = False
 
-            if 'quit' in self._cmds:
-                self._cmds.remove('quit')
+            if 'quit' in cmds:
+                cmds.remove('quit')
                 self._run = False
-            if 'start_playing' in self._cmds:
-                self._cmds.remove('start_playing')
+            if 'start_playing' in cmds:
+                cmds.remove('start_playing')
                 Play(self._screen)
 
         if self._pressed:
@@ -49,7 +49,6 @@ class Menu:
 
     def draw(self):
         if self._pressed:
-            self._screen.fill(Window.bg)
             self._frame.draw(self._screen)
             pg.display.flip()
 
