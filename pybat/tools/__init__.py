@@ -3,6 +3,7 @@ from pathlib import Path
 import pygame as pg
 
 from .resource_manager import resmngr
+from .commands import cmds
 
 
 def hex2rgb(hx: str) -> tuple:

@@ -1,8 +1,8 @@
 import pygame as pg
 
 from play import Play
+from tools import cmds
 from ui import Frame, Button
-from commands import cmds
 from config import Window, font, button_settings
 
 class Menu:

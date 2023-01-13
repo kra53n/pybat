@@ -1,9 +1,8 @@
 import pygame as pg
 
-from commands import cmds
 from config import Window
 from player import Player
-from tools import get_blured_surf, get_colorize_surf, resmngr
+from tools import get_blured_surf, get_colorize_surf, resmngr, cmds
 
 
 class Play:
