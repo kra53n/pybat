@@ -20,11 +20,6 @@ class Paths:
     images = assets / 'images'
 
 
-@dataclass
-class Images:
-    player = 'assets/images/bat.png'
-
-
 pg.font.init()
     
 
