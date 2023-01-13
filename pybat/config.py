@@ -1,3 +1,4 @@
+from pathlib import Path
 from dataclasses import dataclass
 
 import pygame as pg
@@ -13,14 +14,21 @@ class Window:
 
 
 @dataclass
+class Paths:
+    assets = Path('../assets')
+    fonts = assets / 'fonts'
+    images = assets / 'images'
+
+
+@dataclass
 class Images:
     player = 'assets/images/bat.png'
 
 
 pg.font.init()
+    
 
-
-font = pg.font.Font("assets/fonts/MainFont.ttf", 50)
+font = pg.font.Font(Paths.fonts / 'MainFont.ttf', 50)
 button_settings = {'rect': pg.Rect(120, 120, 240, 60),
                    'border_radius': 12,
                    'active_col': pg.Color('0xbb9af7'),
