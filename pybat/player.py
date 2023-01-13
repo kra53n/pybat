@@ -10,8 +10,10 @@ class Player:
     
     def __init__(self, type=None):
         match type:
+            case Player.Type.Red:
+                self.image = load_image(Paths.images / 'red_bat.png', colorkey=-1, scale=0.25)
             case _:
-                self.image = load_image(Paths.images / 'bat.png', colorkey=-1, scale=0.25)
+                self.image = load_image(Paths.images / 'default_bat.png', colorkey=-1, scale=0.25)
 
     @property
     def image(self):
