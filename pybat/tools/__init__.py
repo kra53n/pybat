@@ -1,3 +1,5 @@
+from .resource_manager import ResourceManager
+
 from pathlib import Path
 
 import pygame as pg
@@ -17,22 +19,13 @@ def file_exist(path: str):
         raise Exception(f'Couldn`t load image from {fullpath}')
 
 
-def load_image(path: str, colorkey=None, scale: float = 1):
+def load_image(path: str | Path, scale: float = None) -> pg.Surface:
     file_exist(path)
-
     image = pg.image.load(path)
-
-    if scale != 1:
+    if scale is not None:
         size = tuple(side * scale for side in image.get_size())
         image = pg.transform.scale(image, size)
-
     image = image.convert()
-
-    if colorkey:
-        if colorkey == -1:
-            colorkey = image.get_at((0, 0))
-        image.set_colorkey(colorkey, pg.RLEACCEL)
-
     return image
 
 
