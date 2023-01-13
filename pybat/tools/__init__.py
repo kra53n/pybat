@@ -1,8 +1,8 @@
-from .resource_manager import ResourceManager
-
 from pathlib import Path
 
 import pygame as pg
+
+from .resource_manager import resmngr
 
 
 def hex2rgb(hx: str) -> tuple:
@@ -25,7 +25,6 @@ def load_image(path: str | Path, scale: float = None) -> pg.Surface:
     if scale is not None:
         size = tuple(side * scale for side in image.get_size())
         image = pg.transform.scale(image, size)
-    image = image.convert()
     return image
 
 

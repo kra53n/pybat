@@ -3,7 +3,7 @@ from enum import IntEnum
 import pygame as pg
 
 from config import Paths
-from tools import load_image
+from tools import resmngr
 
 
 class Player:
@@ -12,13 +12,11 @@ class Player:
     
     def __init__(self, surface: pg.Surface, type=None):
         self.surface = surface
-        scale = 6
         
-        match type:
-            case Player.Type.Red:
-                self.image = load_image(Paths.images / 'red_bat.png', scale=scale)
-            case _:
-                self.image = load_image(Paths.images / 'default_bat.png', scale=scale)
+        self.image = {
+            Player.Type.Red: resmngr['red_bat'],
+            None: resmngr['default_bat'],
+        }[type]
 
     def draw(self):
         self.surface.blit(self.image, self.image.get_rect())

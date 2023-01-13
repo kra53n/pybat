@@ -37,7 +37,7 @@ class Play:
                 )
     
     def draw(self):
-        self.screen.fill(pg.Color(0, 0, 0))
+        self.screen.fill(pg.Color(255, 255, 255))
         self.player.draw()
         pg.display.flip()
     
