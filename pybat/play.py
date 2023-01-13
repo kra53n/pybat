@@ -3,7 +3,7 @@ import pygame as pg
 from commands import cmds
 from config import Window
 from player import Player
-from tools import get_blured_surf, get_colorize_surf
+from tools import get_blured_surf, get_colorize_surf, resmngr
 
 
 class Play:
@@ -12,7 +12,7 @@ class Play:
         
         self.clock = pg.time.Clock()
         self.captured_screen = self.screen.copy()
-        self.player = Player(surface=screen, type=Player.Type.Red)
+        self.player = Player(surface=screen, texture=resmngr['red_bat'])
         
         self.run()
         

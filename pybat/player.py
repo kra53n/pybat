@@ -7,16 +7,9 @@ from tools import resmngr
 
 
 class Player:
-    class Type(IntEnum):
-        Red = 0
-    
-    def __init__(self, surface: pg.Surface, type=None):
+    def __init__(self, surface: pg.Surface, texture: pg.Surface):
         self.surface = surface
-        
-        self.image = {
-            Player.Type.Red: resmngr['red_bat'],
-            None: resmngr['default_bat'],
-        }[type]
+        self.texture = texture
 
     def draw(self):
-        self.surface.blit(self.image, self.image.get_rect())
+        self.surface.blit(self.texture, self.texture.get_rect())
